@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NeurAi — Thoughts First. Financial autonomy for Neuralink patients.</title>
+  <meta name="description" content="NeurAi ($BRAINPAY) — the first multi-chain crypto payment protocol driven by thought and voice, built for Neuralink users and people with severe disabilities." />
+  <meta name="theme-color" content="#0b0b12" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="NeurAi — Thoughts First" />
+  <meta property="og:description" content="Send crypto with a thought. Multi-chain payments for Neuralink users and anyone who can't use a keyboard." />
+  <meta property="og:image" content="https://neur.vision/og.png" />
+  <meta property="og:url" content="https://neur.vision" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Tailwind (CDN; fine for a landing page) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink:    '#05050a',
+            panel:  '#0b0b14',
+            panel2: '#11101c',
+            line:   '#1f1b36',
+            neon:   '#7c3aed',   // violet
+            cyber:  '#06b6d4',   // cyan
+            gold:   '#f5c451',   // gold accent
+            mute:   '#9aa0b4',
+          },
+          fontFamily: {
+            sans: ['Inter','system-ui','Segoe UI','sans-serif'],
+            display: ['"Space Grotesk"','Inter','sans-serif'],
+            mono: ['"JetBrains Mono"','ui-monospace','monospace'],
+          },
+          boxShadow: {
+            glow:      '0 0 40px -10px rgba(124,58,237,.55), 0 0 80px -30px rgba(6,182,212,.45)',
+            glowGold:  '0 0 32px -8px rgba(245,196,81,.55)',
+            card:      '0 1px 0 0 rgba(255,255,255,.04) inset, 0 8px 40px -20px rgba(0,0,0,.6)',
+          },
+        },
+      },
+    };
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root { color-scheme: dark; }
+    html, body { background: #05050a; color: #e7e7ef; }
+
+    /* Animated starfield / grid background */
+    .bg-aurora {
+      background:
+        radial-gradient(1200px 600px at 85% -10%, rgba(124,58,237,.28), transparent 60%),
+        radial-gradient(900px 500px at 10% 10%,  rgba(6,182,212,.22),  transparent 60%),
+        radial-gradient(700px 400px at 50% 110%, rgba(245,196,81,.10), transparent 60%),
+        #05050a;
+    }
+    .grid-lines {
+      background-image:
+        linear-gradient(to right, rgba(124,58,237,.09) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(6,182,212,.08) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%);
+    }
+
+    .neon-text {
+      background: linear-gradient(90deg,#a78bfa 0%, #06b6d4 50%, #f5c451 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .gold-text {
+      background: linear-gradient(90deg,#f5c451,#fff2c9,#f5c451);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+
+    .btn {
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.85rem 1.25rem; border-radius:.75rem;
+      font-weight:600; letter-spacing:.01em;
+      transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
+      border:1px solid transparent;
+    }
+    .btn:focus-visible { outline: 2px solid #f5c451; outline-offset: 3px; }
+    .btn-primary {
+      background: linear-gradient(135deg,#7c3aed 0%, #06b6d4 100%);
+      color:#fff; box-shadow: 0 10px 30px -10px rgba(124,58,237,.6);
+    }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 14px 40px -12px rgba(124,58,237,.8); }
+    .btn-gold { background:#f5c451; color:#1a1306; box-shadow: 0 10px 30px -10px rgba(245,196,81,.55); }
+    .btn-gold:hover { transform: translateY(-1px); filter: brightness(1.05); }
+    .btn-ghost { background: rgba(255,255,255,.04); color:#e7e7ef; border-color: rgba(255,255,255,.12); }
+    .btn-ghost:hover { background: rgba(255,255,255,.08); border-color: rgba(124,58,237,.5); }
+
+    .panel {
+      background: linear-gradient(180deg,#0b0b14 0%,#0a0913 100%);
+      border:1px solid #1f1b36;
+      border-radius: 1rem;
+    }
+    .ring-accent { box-shadow: 0 0 0 1px rgba(124,58,237,.35), 0 0 40px -10px rgba(124,58,237,.35); }
+
+    .pulse-dot {
+      width:.5rem; height:.5rem; border-radius:9999px; background:#22c55e;
+      box-shadow: 0 0 0 0 rgba(34,197,94,.7);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(34,197,94,.7); }
+      70%  { box-shadow: 0 0 0 10px rgba(34,197,94,0); }
+      100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+    }
+
+    .skip-link {
+      position:absolute; left:-999px; top:0;
+      background:#f5c451; color:#1a1306; padding:.5rem 1rem; z-index:100; font-weight:700; border-radius:0 0 .5rem 0;
+    }
+    .skip-link:focus { left:0; }
+
+    /* Reduce motion for users who prefer it */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .pulse-dot { animation: none; }
+      *,*::before,*::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+    }
+  </style>
+</head>
+
+<body class="font-sans text-[17px] leading-relaxed antialiased selection:bg-neon/40">
+
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- ──────────── NAV ──────────── -->
+  <header class="fixed top-0 inset-x-0 z-50 backdrop-blur bg-ink/70 border-b border-line">
+    <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+      <a href="#" class="flex items-center gap-2 font-display font-bold text-lg" aria-label="NeurAi home">
+        <span class="inline-grid place-items-center w-8 h-8 rounded-lg bg-gradient-to-br from-neon to-cyber shadow-glow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a4 4 0 0 0-4 4v1a4 4 0 0 0-2 7v1a4 4 0 0 0 6 3.5A4 4 0 0 0 18 16v-1a4 4 0 0 0-2-7V7a4 4 0 0 0-4-4Z"/></svg>
+        </span>
+        <span>Neur<span class="text-cyber">Ai</span></span>
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm text-mute" aria-label="Primary">
+        <a class="hover:text-white focus:text-white" href="#problem">Problem</a>
+        <a class="hover:text-white focus:text-white" href="#how">How it Works</a>
+        <a class="hover:text-white focus:text-white" href="#features">Features</a>
+        <a class="hover:text-white focus:text-white" href="#token">Token</a>
+        <a class="hover:text-white focus:text-white" href="#roadmap">Roadmap</a>
+      </nav>
+      <a href="https://t.me/Neurai_Visionbot" class="btn btn-gold text-sm">Launch Bot</a>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ──────────── HERO ──────────── -->
+    <section class="relative pt-36 pb-28 overflow-hidden bg-aurora" aria-labelledby="hero-h">
+      <div class="absolute inset-0 grid-lines pointer-events-none" aria-hidden="true"></div>
+
+      <div class="relative max-w-7xl mx-auto px-6 grid md:grid-cols-12 gap-10 items-center">
+        <div class="md:col-span-7">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-line bg-white/5 text-xs tracking-wide text-mute">
+            <span class="pulse-dot" aria-hidden="true"></span>
+            Live on BNB Smart Chain · WalletConnect v2
+          </div>
+
+          <h1 id="hero-h" class="font-display mt-6 text-5xl sm:text-6xl md:text-7xl font-bold leading-[1.05] tracking-tight">
+            <span class="neon-text">Thoughts First.</span><br/>
+            <span class="text-white">Money, at the speed</span><br/>
+            <span class="text-white">of <span class="gold-text">intention</span>.</span>
+          </h1>
+
+          <p class="mt-6 text-lg md:text-xl text-mute max-w-2xl">
+            NeurAi is the first multi-chain crypto payment protocol designed for
+            <strong class="text-white">Neuralink patients</strong> and people with
+            severe physical disabilities — send, receive, and manage assets with
+            your voice today, and your thoughts tomorrow.
+          </p>
+
+          <div class="mt-9 flex flex-wrap gap-4">
+            <a href="#token" class="btn btn-primary" aria-label="Buy BRAINPAY on PancakeSwap">
+              ⚡ Buy $BRAINPAY
+            </a>
+            <a href="https://t.me/Neurai_Visionbot" class="btn btn-gold">
+              🤖 Try Demo Bot
+            </a>
+            <a href="https://t.me/neurai_vision" class="btn btn-ghost">
+              💬 Join Community
+            </a>
+          </div>
+
+          <dl class="mt-12 grid grid-cols-3 gap-6 max-w-lg">
+            <div>
+              <dt class="text-xs uppercase tracking-wider text-mute">Chains</dt>
+              <dd class="mt-1 font-display text-2xl text-white">8+</dd>
+            </div>
+            <div>
+              <dt class="text-xs uppercase tracking-wider text-mute">Input Modes</dt>
+              <dd class="mt-1 font-display text-2xl text-white">Voice · BCI</dd>
+            </div>
+            <div>
+              <dt class="text-xs uppercase tracking-wider text-mute">Custody</dt>
+              <dd class="mt-1 font-display text-2xl text-white">Self</dd>
+            </div>
+          </dl>
+        </div>
+
+        <!-- Hero visual -->
+        <div class="md:col-span-5">
+          <div class="panel p-6 shadow-glow ring-accent">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2 text-sm text-mute">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-500/70"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-400/70"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/70"></span>
+              </div>
+              <span class="text-xs text-mute font-mono">brain-signal · active</span>
+            </div>
+
+            <div class="mt-5 font-mono text-sm space-y-3">
+              <p class="text-cyber">▸ Brain signal captured</p>
+              <p class="text-white"><span class="text-mute">thought:</span> "send twenty USDC to Alice on Solana"</p>
+              <p class="text-neon">▸ AI intent parsed ✓</p>
+              <div class="panel !rounded-lg p-4 !border-line">
+                <div class="flex justify-between text-xs uppercase tracking-wider text-mute">
+                  <span>Transaction</span><span>pending signature</span>
+                </div>
+                <div class="mt-2 text-white font-display text-2xl">20.00 <span class="text-mute text-base">USDC</span></div>
+                <div class="text-xs text-mute mt-1">to <span class="text-white">0xAl1ce…42f</span> on <span class="text-gold">Solana</span></div>
+              </div>
+              <p class="text-emerald-400">▸ Awaiting WalletConnect approval…</p>
+            </div>
+          </div>
+
+          <p class="mt-4 text-xs text-mute text-center">Live simulation — no private keys leave your wallet.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────── PROBLEM / SOLUTION ──────────── -->
+    <section id="problem" class="py-24 border-y border-line" aria-labelledby="problem-h">
+      <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12">
+        <div>
+          <span class="text-xs tracking-[0.2em] uppercase text-gold">The Problem</span>
+          <h2 id="problem-h" class="font-display text-4xl md:text-5xl font-bold mt-3 leading-tight">
+            Crypto was never built for people who can't type.
+          </h2>
+          <p class="mt-5 text-lg text-mute">
+            Every wallet, every DEX, every bridge assumes a user with two working hands,
+            clear vision, and the motor control to approve a pop-up in under 60 seconds.
+          </p>
+          <p class="mt-4 text-lg text-mute">
+            For the 1.3 billion people living with disabilities — and the pioneers
+            already using Neuralink — that assumption is a wall.
+          </p>
+        </div>
+
+        <div class="panel p-8">
+          <span class="text-xs tracking-[0.2em] uppercase text-cyber">Our Solution</span>
+          <h3 class="font-display text-2xl md:text-3xl font-bold mt-3">Thoughts First. Keys Never Leave You.</h3>
+          <ul class="mt-6 space-y-4 text-mute">
+            <li class="flex gap-3"><span class="text-neon" aria-hidden="true">◆</span><span><strong class="text-white">Voice today:</strong> Whisper AI + Claude NLP parse natural speech into verified on-chain intents.</span></li>
+            <li class="flex gap-3"><span class="text-cyber" aria-hidden="true">◆</span><span><strong class="text-white">BCI tomorrow:</strong> A Brain Signal Mode ready for Neuralink and next-gen EEG inputs.</span></li>
+            <li class="flex gap-3"><span class="text-gold"  aria-hidden="true">◆</span><span><strong class="text-white">Self-custody always:</strong> WalletConnect v2 in a Telegram Mini App — we never touch your keys.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────── HOW IT WORKS ──────────── -->
+    <section id="how" class="py-24" aria-labelledby="how-h">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="max-w-3xl">
+          <span class="text-xs tracking-[0.2em] uppercase text-gold">How It Works</span>
+          <h2 id="how-h" class="font-display text-4xl md:text-5xl font-bold mt-3">Four steps. Zero keyboards.</h2>
+        </div>
+
+        <ol class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-6" role="list">
+          <li class="panel p-6 relative">
+            <div class="text-gold font-display text-5xl">1</div>
+            <h3 class="mt-2 font-display text-xl font-bold text-white">Think or Speak</h3>
+            <p class="mt-2 text-mute text-sm">"Send 20 USDC to Alice on Solana." A thought, a whisper — that's it.</p>
+          </li>
+          <li class="panel p-6 relative">
+            <div class="text-gold font-display text-5xl">2</div>
+            <h3 class="mt-2 font-display text-xl font-bold text-white">AI Parses Intent</h3>
+            <p class="mt-2 text-mute text-sm">Claude + Whisper decode amount, token, recipient, and chain with human-level precision.</p>
+          </li>
+          <li class="panel p-6 relative">
+            <div class="text-gold font-display text-5xl">3</div>
+            <h3 class="mt-2 font-display text-xl font-bold text-white">Preview &amp; Sign</h3>
+            <p class="mt-2 text-mute text-sm">Gas, route, destination — all verified on-screen, then signed in your own wallet via WalletConnect.</p>
+          </li>
+          <li class="panel p-6 relative">
+            <div class="text-gold font-display text-5xl">4</div>
+            <h3 class="mt-2 font-display text-xl font-bold text-white">Confirmed on-chain</h3>
+            <p class="mt-2 text-mute text-sm">Hash, explorer link, receipt — delivered back to you in Telegram in seconds.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ──────────── FEATURES ──────────── -->
+    <section id="features" class="py-24 bg-aurora border-y border-line" aria-labelledby="features-h">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="max-w-3xl">
+          <span class="text-xs tracking-[0.2em] uppercase text-cyber">Features</span>
+          <h2 id="features-h" class="font-display text-4xl md:text-5xl font-bold mt-3">Built for everyone<br class="hidden md:block"/> — optimized for the 1.3 billion.</h2>
+        </div>
+
+        <div class="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <article class="panel p-7 hover:ring-accent transition-shadow">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-neon to-cyber grid place-items-center shadow-glow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a4 4 0 0 0-4 4v1a4 4 0 0 0-2 7v1a4 4 0 0 0 6 3.5A4 4 0 0 0 18 16v-1a4 4 0 0 0-2-7V7a4 4 0 0 0-4-4Z"/></svg>
+            </div>
+            <h3 class="mt-5 font-display text-xl font-bold text-white">Brain Signal Mode</h3>
+            <p class="mt-2 text-mute text-sm">Neuralink-ready channel that accepts EEG/BCI intents, verified through a multi-step confirmation loop to prevent false positives.</p>
+          </article>
+
+          <article class="panel p-7 hover:ring-accent transition-shadow">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyber to-gold grid place-items-center shadow-glow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" class="w-6 h-6 text-ink" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v12M8 10a4 4 0 0 0 8 0M5 22h14M9 18h6"/></svg>
+            </div>
+            <h3 class="mt-5 font-display text-xl font-bold text-white">Voice Fallback</h3>
+            <p class="mt-2 text-mute text-sm">OpenAI Whisper transcribes, Claude parses. Speak naturally — no command syntax to memorize, no button mazes to navigate.</p>
+          </article>
+
+          <article class="panel p-7 hover:ring-accent transition-shadow">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-gold to-neon grid place-items-center shadow-glowGold" aria-hidden="true">
+              <svg viewBox="0 0 24 24" class="w-6 h-6 text-ink" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+            </div>
+            <h3 class="mt-5 font-display text-xl font-bold text-white">WalletConnect v2</h3>
+            <p class="mt-2 text-mute text-sm">Signing happens in a Telegram Mini App via Reown AppKit + ethers.js. MetaMask, Trust, Rainbow, Phantom — no private keys ever touch our servers.</p>
+          </article>
+
+          <article class="panel p-7 hover:ring-accent transition-shadow">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyber to-neon grid place-items-center shadow-glow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a13 13 0 0 1 0 18M12 3a13 13 0 0 0 0 18"/></svg>
+            </div>
+            <h3 class="mt-5 font-display text-xl font-bold text-white">Multi-Chain Native</h3>
+            <p class="mt-2 text-mute text-sm">BSC, Ethereum, Polygon, Arbitrum, Base, Solana, Tron, and Bitcoin — all from a single conversational interface.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────── TOKEN ──────────── -->
+    <section id="token" class="py-24" aria-labelledby="token-h">
+      <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-10 items-start">
+        <div class="lg:col-span-5">
+          <span class="text-xs tracking-[0.2em] uppercase text-gold">Token</span>
+          <h2 id="token-h" class="font-display text-4xl md:text-5xl font-bold mt-3 gold-text">$BRAINPAY</h2>
+          <p class="mt-5 text-mute text-lg">
+            The native utility and governance token powering NeurAi — gas on payment flows,
+            staking rewards for long-term holders, and voting rights on protocol direction.
+          </p>
+
+          <div class="mt-7 flex flex-wrap gap-3">
+            <a class="btn btn-primary" href="https://pancakeswap.finance/swap?outputCurrency=0xED1b903d349d82a37ad297B4ADbcfbfBcc48935E" rel="noopener">📈 Buy on PancakeSwap</a>
+            <a class="btn btn-ghost" href="https://bscscan.com/token/0xED1b903d349d82a37ad297B4ADbcfbfBcc48935E" rel="noopener">🔍 BscScan</a>
+            <a class="btn btn-gold"  href="https://neuraivision.github.io/neurai-whitepaper/" rel="noopener">📄 Whitepaper</a>
+          </div>
+        </div>
+
+        <dl class="lg:col-span-7 grid sm:grid-cols-2 gap-4">
+          <div class="panel p-6">
+            <dt class="text-xs tracking-[0.2em] uppercase text-mute">Contract (BSC)</dt>
+            <dd class="mt-2 font-mono text-sm break-all text-white" id="contract">0xED1b903d349d82a37ad297B4ADbcfbfBcc48935E</dd>
+            <button type="button" onclick="navigator.clipboard.writeText(document.getElementById('contract').textContent).then(()=>{this.textContent='✓ Copied'})" class="mt-3 text-xs text-cyber hover:text-white focus:text-white underline underline-offset-4">Copy address</button>
+          </div>
+          <div class="panel p-6">
+            <dt class="text-xs tracking-[0.2em] uppercase text-mute">Total Supply</dt>
+            <dd class="mt-2 font-display text-3xl text-white">1,000,000,000</dd>
+            <p class="text-xs text-mute mt-1">Fixed · deflationary via 2% transaction burn</p>
+          </div>
+          <div class="panel p-6">
+            <dt class="text-xs tracking-[0.2em] uppercase text-mute">Network</dt>
+            <dd class="mt-2 font-display text-xl text-white">BNB Smart Chain · BEP-20</dd>
+          </div>
+          <div class="panel p-6">
+            <dt class="text-xs tracking-[0.2em] uppercase text-mute">Burn Mechanism</dt>
+            <dd class="mt-2 text-white text-sm">2% per tx · 25% revenue buy-and-burn · 1M burn per 10K BCI users</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ──────────── ROADMAP ──────────── -->
+    <section id="roadmap" class="py-24 border-y border-line bg-aurora" aria-labelledby="roadmap-h">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="max-w-3xl">
+          <span class="text-xs tracking-[0.2em] uppercase text-cyber">Roadmap</span>
+          <h2 id="roadmap-h" class="font-display text-4xl md:text-5xl font-bold mt-3">From voice today to thoughts tomorrow.</h2>
+        </div>
+
+        <ol class="mt-14 relative grid md:grid-cols-5 gap-6" role="list">
+          <li class="panel p-6">
+            <div class="text-xs tracking-[0.2em] uppercase text-gold">Phase 1 · Q2 2026</div>
+            <h3 class="mt-2 font-display text-lg font-bold text-white">Genesis</h3>
+            <p class="mt-2 text-mute text-sm">Telegram bot live · multi-chain payments · voice · WalletConnect v2 signing.</p>
+          </li>
+          <li class="panel p-6">
+            <div class="text-xs tracking-[0.2em] uppercase text-gold">Phase 2 · Q3 2026</div>
+            <h3 class="mt-2 font-display text-lg font-bold text-white">Expansion</h3>
+            <p class="mt-2 text-mute text-sm">CEX listings · staking v1 · accessibility grants · community governance.</p>
+          </li>
+          <li class="panel p-6">
+            <div class="text-xs tracking-[0.2em] uppercase text-gold">Phase 3 · Q4 2026</div>
+            <h3 class="mt-2 font-display text-lg font-bold text-white">BCI Pilot</h3>
+            <p class="mt-2 text-mute text-sm">Closed EEG headset pilot · Neuralink research partnerships · accuracy benchmarks.</p>
+          </li>
+          <li class="panel p-6">
+            <div class="text-xs tracking-[0.2em] uppercase text-gold">Phase 4 · 2027</div>
+            <h3 class="mt-2 font-display text-lg font-bold text-white">Mainstream</h3>
+            <p class="mt-2 text-mute text-sm">Consumer BCI integrations · mobile app · NeurCard · merchant plugins.</p>
+          </li>
+          <li class="panel p-6">
+            <div class="text-xs tracking-[0.2em] uppercase text-gold">Phase 5 · 2028+</div>
+            <h3 class="mt-2 font-display text-lg font-bold text-white">NeurOS</h3>
+            <p class="mt-2 text-mute text-sm">Full neural OS · thought-native DeFi · open BCI standards.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ──────────── CTA / COMMUNITY ──────────── -->
+    <section class="py-24" aria-labelledby="cta-h">
+      <div class="max-w-4xl mx-auto px-6 text-center">
+        <h2 id="cta-h" class="font-display text-4xl md:text-6xl font-bold leading-tight">
+          The next billion users won't type.<br/>
+          <span class="neon-text">They'll just think.</span>
+        </h2>
+        <p class="mt-6 text-mute text-lg">
+          Join the community building the first financial layer for the human mind.
+        </p>
+        <div class="mt-9 flex flex-wrap justify-center gap-4">
+          <a class="btn btn-primary" href="https://t.me/Neurai_Visionbot">🤖 Launch Demo Bot</a>
+          <a class="btn btn-gold"    href="https://t.me/neurai_vision">💬 Join Telegram</a>
+          <a class="btn btn-ghost"   href="https://x.com/NeurAi_vision">🐦 Follow on X</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ──────────── FOOTER ──────────── -->
+  <footer class="border-t border-line bg-ink">
+    <div class="max-w-7xl mx-auto px-6 py-14 grid md:grid-cols-4 gap-10 text-sm">
+      <div>
+        <div class="flex items-center gap-2 font-display font-bold text-lg">
+          <span class="inline-grid place-items-center w-8 h-8 rounded-lg bg-gradient-to-br from-neon to-cyber" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a4 4 0 0 0-4 4v1a4 4 0 0 0-2 7v1a4 4 0 0 0 6 3.5A4 4 0 0 0 18 16v-1a4 4 0 0 0-2-7V7a4 4 0 0 0-4-4Z"/></svg>
+          </span>
+          Neur<span class="text-cyber">Ai</span>
+        </div>
+        <p class="mt-4 text-mute">Thoughts First. Multi-chain payments for the next billion users.</p>
+      </div>
+      <div>
+        <h3 class="text-white font-semibold">Product</h3>
+        <ul class="mt-4 space-y-2 text-mute">
+          <li><a class="hover:text-white focus:text-white" href="https://t.me/Neurai_Visionbot">Telegram Bot</a></li>
+          <li><a class="hover:text-white focus:text-white" href="#features">Features</a></li>
+          <li><a class="hover:text-white focus:text-white" href="#roadmap">Roadmap</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-white font-semibold">Resources</h3>
+        <ul class="mt-4 space-y-2 text-mute">
+          <li><a class="hover:text-white focus:text-white" href="https://neuraivision.github.io/neurai-whitepaper/">Whitepaper</a></li>
+          <li><a class="hover:text-white focus:text-white" href="https://github.com/neuraivision/neurai-whitepaper/raw/main/WHITEPAPER.pdf">PDF</a></li>
+          <li><a class="hover:text-white focus:text-white" href="https://bscscan.com/token/0xED1b903d349d82a37ad297B4ADbcfbfBcc48935E">BscScan</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-white font-semibold">Community</h3>
+        <ul class="mt-4 space-y-2 text-mute">
+          <li><a class="hover:text-white focus:text-white" href="https://t.me/neurai_vision">Telegram</a></li>
+          <li><a class="hover:text-white focus:text-white" href="https://x.com/NeurAi_vision">X / Twitter</a></li>
+          <li><a class="hover:text-white focus:text-white" href="https://neur.vision">Website</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-line">
+      <div class="max-w-7xl mx-auto px-6 py-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-mute">
+        <p>© <span id="yr"></span> NeurAi Vision. Built with empathy and open source.</p>
+        <p>Not financial advice. Crypto is volatile. Always self-custody.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+</html>
